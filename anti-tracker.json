@@ -1,9 +1,9 @@
 {
-  "name": "Full URL Tracking Parameters Removal",
-  "desc": "全网链接跟踪参数净化规则（支持贴吧/YouTube/B站/知乎/微博/电商等）",
+  "name": "RunningCheese-URL-Cleaner",
+  "description": "全网链接跟踪参数净化规则集",
   "rules": [
     {
-      "name": "Baidu Tieba Tracking Removal",
+      "name": "百度贴吧净化",
       "action": "redirect",
       "match": "^https?://(\\w+\\.)?tieba\\.baidu\\.com(/.*\\?)(.*)$",
       "target": "https://$1tieba.baidu.com$2$3",
@@ -13,7 +13,7 @@
       }
     },
     {
-      "name": "YouTube Main Tracking Removal",
+      "name": "YouTube主站净化",
       "action": "redirect",
       "match": "^https?://(www|m)\\.youtube\\.com/watch\\?(.*)",
       "target": "https://$1.youtube.com/watch?$2",
@@ -23,7 +23,7 @@
       }
     },
     {
-      "name": "YouTube Shortlink Cleaner",
+      "name": "YouTube短链接净化",
       "action": "redirect",
       "match": "^https?://youtu\\.be/(\\w+)\\?(.*)",
       "target": "https://youtu.be/$1",
@@ -32,7 +32,7 @@
       }
     },
     {
-      "name": "Bilibili Tracking Removal",
+      "name": "哔哩哔哩净化",
       "action": "redirect",
       "match": "^https?://(\\w+)\\.bilibili\\.com(/.*\\?)(.*)$",
       "target": "https://$1.bilibili.com$2$3",
@@ -41,7 +41,7 @@
       }
     },
     {
-      "name": "Zhihu Parameter Cleaner",
+      "name": "知乎参数清理",
       "action": "redirect",
       "match": "^https?://(\\w+)\\.zhihu\\.com(/.*\\?)(.*)$",
       "target": "https://$1.zhihu.com$2$3",
@@ -50,7 +50,7 @@
       }
     },
     {
-      "name": "Weibo Mobile Tracking Removal",
+      "name": "微博移动端净化",
       "action": "redirect",
       "match": "^https?://(weibo|m\\.weibo)\\.cn(/.*\\?)(.*)$",
       "target": "https://$1.cn$2$3",
@@ -59,7 +59,7 @@
       }
     },
     {
-      "name": "E-Commerce Tracking Params Removal",
+      "name": "电商平台净化",
       "action": "redirect",
       "match": "^https?://(item\\.(jd|taobao|pinduoduo)\\.com)/.*\\?(.*)",
       "target": "https://$1$path?$3",
