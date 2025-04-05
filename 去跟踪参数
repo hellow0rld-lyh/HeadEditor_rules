@@ -1,0 +1,124 @@
+{
+  "name": "Full Tracking Params Removal",
+  "desc": "全网链接净化（支持贴吧/YouTube/B站/知乎/微博/电商）",
+  "rules": [
+    // 百度贴吧规则（增强版）
+    {
+      "action": "redirect",
+      "match": "^https?://(\\w+\\.)?tieba\\.baidu\\.com(/.*\\?)(.*)$",
+      "target": "https://$1tieba.baidu.com$2$3",
+      "params": {
+        "remove": [
+          "from",
+          "fr",
+          "share_from",
+          "share_*",
+          "is_jump",
+          "ie",
+          "timestamp",
+          "src",
+          "traceid"
+        ],
+        "keep": ["pn", "kw", "pid"]  // 保留分页/吧名/帖子ID
+      }
+    },
+
+    // YouTube规则（国际/国内版）
+    {
+      "action": "redirect",
+      "match": "^https?://(www|m)\\.youtube\\.com/watch\\?(.*)",
+      "target": "https://$1.youtube.com/watch?$2",
+      "params": {
+        "remove": [
+          "feature",
+          "utm_*",       // 清除所有UTM参数
+          "si",          // 推荐算法标识
+          "pp",          // 推广参数
+          "app",         // 客户端追踪
+          "persist_app", // 持续追踪
+          "vnd",         // 深度链接标识
+          "cbrd"         // 跨浏览器追踪
+        ],
+        "keep": ["v"]   // 必须保留的视频ID
+      }
+    },
+    {
+      "action": "redirect",
+      "match": "^https?://youtu\\.be/(\\w+)\\?(.*)",
+      "target": "https://youtu.be/$1",
+      "params": {
+        "remove": ["*"]  // 短链接清除所有参数
+      }
+    },
+
+    // B站规则（更新版）
+    {
+      "action": "redirect",
+      "match": "^https?://(\\w+)\\.bilibili\\.com(/.*\\?)(.*)$",
+      "target": "https://$1.bilibili.com$2$3",
+      "params": {
+        "remove": [
+          "from",
+          "share_*",
+          "timestamp",
+          "spm_id_from",
+          "bbid",
+          "ts",          // 时间戳
+          "broadcast_type" // 直播追踪
+        ]
+      }
+    },
+
+    // 知乎规则（增强版）
+    {
+      "action": "redirect",
+      "match": "^https?://(\\w+)\\.zhihu\\.com(/.*\\?)(.*)$",
+      "target": "https://$1.zhihu.com$2$3",
+      "params": {
+        "remove": [
+          "utm_*",
+          "share_*",
+          "source",
+          "s_r",
+          "ncid",        // 推荐追踪
+          "notification" // 消息追踪
+        ]
+      }
+    },
+
+    // 微博规则（移动端优化）
+    {
+      "action": "redirect",
+      "match": "^https?://(weibo|m\\.weibo)\\.cn(/.*\\?)(.*)$",
+      "target": "https://$1.cn$2$3",
+      "params": {
+        "remove": [
+          "from",
+          "type",
+          "sudaref",
+          "lfid",
+          "uid",         // 用户追踪
+          "rl"           // 页面来源
+        ]
+      }
+    },
+
+    // 电商通用规则（淘宝/京东/拼多多）
+    {
+      "action": "redirect",
+      "match": "^https?://(item\\.(jd|taobao|pinduoduo)\\.com)/.*\\?(.*)",
+      "target": "https://$1$path?$3",
+      "params": {
+        "remove": [
+          "utm_*",
+          "spm",
+          "_tb_token_",
+          "scm.*",
+          "trackId",
+          "referral",    // 推荐追踪
+          "ad_id"       // 广告标识
+        ]
+      }
+    }
+  ]
+}
